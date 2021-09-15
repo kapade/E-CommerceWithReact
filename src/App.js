@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Registration from './pages/Registration';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Product from './components/Product';
+import AddProduct from './admin/AddProduct';
 
 function App() {
   return (
@@ -28,6 +29,9 @@ function App() {
           </Route>
           <Route path="/registration" >
             <Registration />
+          </Route>
+          <Route path="/add" >
+            <AddProduct />
           </Route>
         </Switch>
       </Router>

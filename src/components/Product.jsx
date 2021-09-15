@@ -53,12 +53,14 @@ const Product = () => {
 
 const ProductWrapper = styled.div`
     background-image: url("https://dob3qj4mreqzz.cloudfront.net/lines.png");
+    margin-top: 50px;
+    margin-bottom: 100px;
 `
 
 const Container = styled.div`
     width: 70%;
     height: 90vh;
-    margin: 100px auto;
+    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
