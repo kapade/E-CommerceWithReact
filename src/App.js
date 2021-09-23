@@ -1,5 +1,6 @@
 import Footer from './components/Footer';
 import NavBar from './components/NavBar';
+// import Svg from './components/Svg';
 import Home from './pages/home/Home';
 import Shop from './pages/shop/Shop';
 import Login from './pages/Login';

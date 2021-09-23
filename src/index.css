@@ -38,9 +38,27 @@ html, body {
 
 a {
     margin-left: 10px;
-    color: #3f8079;
+    color: #B8B4AB;
+    text-decoration: none;
+    width: 40vw;
+    text-align: center;
+    padding-top: 90px;
+    font-size: 2em;
+    font-family: "Requiem Text-HTF",serif;
+    opacity: 0.8;
+}
+a:hover{
+    color: #d4d0c3;
+    
 }
 
+ul{
+    background-color: #4e4540;
+    height: 80vh;
+}
+.menu{
+    height: 100vh;
+}
 .success {
     color: green;
 }
@@ -48,3 +66,14 @@ a {
 .error {
     color: red;
 }
+
+.css-i9fmh8-MuiBackdrop-root-MuiModal-backdrop {
+    background-color: white !important;
+    opacity: 0.6 !important;
+}
+
+.css-h4y409-MuiList-root{
+    height: 100vh !important;
+}
+
+
