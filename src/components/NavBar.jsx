@@ -11,50 +11,139 @@ import "../index.css";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { makeStyles } from "@material-ui/core/styles";
+import { CancelOutlined } from "@material-ui/icons";
+import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
+// import { Lines } from "./Lines";
+import { Button } from "@material-ui/core";
 
-const useStyles = makeStyles({ 
+const useStyles = makeStyles({
   menuItem: {
     background: "#A36833",
-  
-},
-
+  },
 });
 
 export default function NavBar() {
+  const [state, setState] = React.useState({
+    right: false,
+  });
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event &&
+      event.type === 'keydown' &&
+      (event.key === 'Tab' || event.key === 'Shift')
+    ) {
+      
+      return;
+    }
+
+    setState({ ...state, [anchor]: open });
+  };
+
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+  const ShoppingCartOutlinedStyle = {
+    cursor: "pointer",
+    borderRadius: "50%",
+    border: "2px solid #d4d0c3",
+    color: "#d4d0c3",
+    position: "absolute",
+    left: "!important 0px",
+    margin: "!important 10px",
+    width: "!important 35px",
+    height: "!important 30px"
+  };
+  const CancelOutlinedStyle = {
+    cursor: "pointer",
+    color: "#d4d0c3",
+    position: "absolute",
+    right: "0px",
+    margin: "10px",
+    width: "35px",
+    height: "35px"
+  };
 
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  const shopFunc = () =>{
+    window.location.href = "/shop"
+  }
+  const homeFunc = () => {
+    window.location.href = "/"
+  }
   return (
+    
     <Container>
       <Wrapper>
         <Left>
-          <ShoppingCartOutlined />
+          <ShoppingCartOutlined onClick={shopFunc}/>
         </Left>
         <Center>
-          <Logo>CHAMISAL</Logo>
+          <Logo onClick={homeFunc}>CHAMISAL</Logo>
           <LogoSmall>VINEYARDS</LogoSmall>
         </Center>
         <Right>
-          <MenuOutlined onClick={handleClick}/>
-          <Menu 
+          {['right'].map((anchor) => (
+        <React.Fragment key={anchor}>
+          <MenuOutlined onClick={toggleDrawer(anchor, true)} />
+          <SwipeableDrawer
+            anchor={anchor}
+            open={state[anchor]}
+            onClose={toggleDrawer(anchor, false)}
+            onOpen={toggleDrawer(anchor, true)}
+          >
+             <List>
+            <Button ><ShoppingCartOutlined onClick={shopFunc} style={ShoppingCartOutlinedStyle}  /></Button>
+            <CancelOutlined style={CancelOutlinedStyle} onClose={toggleDrawer(anchor, false)}/>
+            <ListItem onClick={handleClose}>
+              {" "}
+              <a href="/">HOME</a>
+            </ListItem>
+            <ListItem onClick={handleClose}>
+              <a href="/shop">SHOP</a>
+            </ListItem>
+            <ListItem onClick={handleClose}>
+              <a href="/login">LOGIN</a>
+            </ListItem>
+            <ListItem onClick={handleClose}>
+              <a href="/registration">REGISTRATION</a>
+            </ListItem>
+      
+      </List>
+      <Divider />
+            {/* <Menu
             className="menu"
             anchorEl={anchorEl}
             keepMounted
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <MenuItem className={(classes.menuItem)} onClick={handleClose}> <a href="/">home</a></MenuItem>
-            <MenuItem className={(classes.menuItem)} onClick={handleClose}><a href="/shop">shop</a></MenuItem>
-            <MenuItem className={(classes.menuItem)} onClick={handleClose}><a href="/login">login</a></MenuItem>
-            <MenuItem className={(classes.menuItem)} onClick={handleClose}><a href="/registration">registration</a></MenuItem>
-          </Menu>
+            <ShoppingCartOutlined style={ShoppingCartOutlinedStyle} onClick={shopFunc} />
+            <CancelOutlined style={CancelOutlinedStyle} onClick={handleClose}/>
+            <ListItem onClick={handleClose}>
+              {" "}
+              <a href="/">Home</a>
+            </ListItem>
+            <ListItem onClick={handleClose}>
+              <a href="/shop">Shop</a>
+            </ListItem>
+            <ListItem onClick={handleClose}>
+              <a href="/login">Login</a>
+            </ListItem>
+            <ListItem onClick={handleClose}>
+              <a href="/registration">Registration</a>
+            </ListItem>
+          </Menu> */}
+          </SwipeableDrawer>
+        </React.Fragment>
+      ))}
         </Right>
       </Wrapper>
     </Container>
@@ -108,5 +197,6 @@ const Right = styled.div`
   justify-content: flex-end;
   max-width: 100%;
 `;
+
 
 
