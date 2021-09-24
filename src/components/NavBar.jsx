@@ -50,46 +50,30 @@ export default function NavBar() {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  const ShoppingCartOutlinedStyle = {
+  const ToggleStyles = {
     cursor: "pointer",
     borderRadius: "50%",
     border: "2px solid #d4d0c3",
     color: "#d4d0c3",
-    position: "absolute",
-    left: "!important 0px",
-    margin: "!important 10px",
-    width: "!important 35px",
-    height: "!important 30px"
+    zIndex: "10",
+    width: "35px",
+    height: "35px",
+    padding: "5px"
   };
-  const CancelOutlinedStyle = {
+
+  const SocialIcons = {
     cursor: "pointer",
     color: "#d4d0c3",
-    position: "absolute",
-    right: "0px",
-    margin: "10px",
+    opacity: "1",
+    borderRadius: "50%",
+    border: "2px solid #d4d0c3",
     width: "35px",
-    height: "35px"
-  };
-  const SocialIconFb = {
-    cursor: "pointer",
-    color: "#d4d0c3",
-    position: "absolute",
-    right: "400px",
-    bottom: "50px",
-    margin: "10px",
-    width: "35px",
-    height: "35px"
+    height: "35px",
+    zIndex: "10",
+    padding: "5px",
+    marginRight: "30px"
   }
-  const SocialIconInsta = {
-    cursor: "pointer",
-    color: "#d4d0c3",
-    position: "absolute",
-    right: "250px",
-    bottom: "50px",
-    margin: "10px",
-    width: "35px",
-    height: "35px"
-  }
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -98,6 +82,12 @@ export default function NavBar() {
   }
   const homeFunc = () => {
     window.location.href = "/"
+  }
+  const FbFunc = () => {
+    window.location.href = "https://www.facebook.com/Chamisal.Vineyards"
+  }
+  const InstaFunc = () => {
+    window.location.href = "https://www.instagram.com/chamisalvyd/"
   }
   return (
     
@@ -121,9 +111,11 @@ export default function NavBar() {
             onOpen={toggleDrawer(anchor, true)}
           >
              <List style={{position:"relative"}} >
-               <Lines />
-            <Button ><ShoppingCartOutlined onClick={shopFunc} style={ShoppingCartOutlinedStyle}  /></Button>
-            <CancelOutlined style={CancelOutlinedStyle} onClick={homeFunc}/>
+               <Lines/>\
+               <Toggle>
+            <Button ><ShoppingCartOutlined onClick={shopFunc} style={ToggleStyles}/></Button>
+            <CancelOutlined  style={ToggleStyles} onClick={toggleDrawer(anchor, false)}/>
+            </Toggle>
             <ListItem onClick={handleClose}>
               {" "}
               <a href="/">HOME</a>
@@ -137,33 +129,12 @@ export default function NavBar() {
             <ListItem onClick={handleClose}>
               <a href="/registration">REGISTRATION</a>
             </ListItem>
-            <Facebook style = {SocialIconFb}></Facebook>
-            <Instagram style = {SocialIconInsta} />
+            <Social>
+            <Facebook onClick={FbFunc} style={SocialIcons}></Facebook>
+            <Instagram onClick={InstaFunc} style={SocialIcons}/>
+            </Social>
+            
       </List>
-      <Divider />
-            {/* <Menu
-            className="menu"
-            anchorEl={anchorEl}
-            keepMounted
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-          >
-            <ShoppingCartOutlined style={ShoppingCartOutlinedStyle} onClick={shopFunc} />
-            <CancelOutlined style={CancelOutlinedStyle} onClick={handleClose}/>
-            <ListItem onClick={handleClose}>
-              {" "}
-              <a href="/">Home</a>
-            </ListItem>
-            <ListItem onClick={handleClose}>
-              <a href="/shop">Shop</a>
-            </ListItem>
-            <ListItem onClick={handleClose}>
-              <a href="/login">Login</a>
-            </ListItem>
-            <ListItem onClick={handleClose}>
-              <a href="/registration">Registration</a>
-            </ListItem>
-          </Menu> */}
           </SwipeableDrawer>
         </React.Fragment>
       ))}
@@ -220,6 +191,17 @@ const Right = styled.div`
   justify-content: flex-end;
   max-width: 100%;
 `;
-
+const Toggle = styled.div`
+display:flex;
+align-items: center;
+justify-content: space-between;
+margin: 5px;
+`;
+const Social = styled.div`
+display:flex;
+align-items: center;
+justify-content: center;
+margin-top: 50px;
+`;
 
 
