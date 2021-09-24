@@ -16,8 +16,10 @@ import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
-// import { Lines } from "./Lines";
 import { Button } from "@material-ui/core";
+import { Lines } from "./Lines";
+import { Facebook } from "@material-ui/icons";
+import { Instagram } from "@material-ui/icons";
 
 const useStyles = makeStyles({
   menuItem: {
@@ -68,7 +70,26 @@ export default function NavBar() {
     width: "35px",
     height: "35px"
   };
-
+  const SocialIconFb = {
+    cursor: "pointer",
+    color: "#d4d0c3",
+    position: "absolute",
+    right: "400px",
+    bottom: "50px",
+    margin: "10px",
+    width: "35px",
+    height: "35px"
+  }
+  const SocialIconInsta = {
+    cursor: "pointer",
+    color: "#d4d0c3",
+    position: "absolute",
+    right: "250px",
+    bottom: "50px",
+    margin: "10px",
+    width: "35px",
+    height: "35px"
+  }
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -99,9 +120,10 @@ export default function NavBar() {
             onClose={toggleDrawer(anchor, false)}
             onOpen={toggleDrawer(anchor, true)}
           >
-             <List>
+             <List style={{position:"relative"}} >
+               <Lines />
             <Button ><ShoppingCartOutlined onClick={shopFunc} style={ShoppingCartOutlinedStyle}  /></Button>
-            <CancelOutlined style={CancelOutlinedStyle} onClose={toggleDrawer(anchor, false)}/>
+            <CancelOutlined style={CancelOutlinedStyle} onClick={homeFunc}/>
             <ListItem onClick={handleClose}>
               {" "}
               <a href="/">HOME</a>
@@ -115,7 +137,8 @@ export default function NavBar() {
             <ListItem onClick={handleClose}>
               <a href="/registration">REGISTRATION</a>
             </ListItem>
-      
+            <Facebook style = {SocialIconFb}></Facebook>
+            <Instagram style = {SocialIconInsta} />
       </List>
       <Divider />
             {/* <Menu
