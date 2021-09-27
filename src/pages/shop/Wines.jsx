@@ -4,74 +4,44 @@ import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import Product from '../../components/Product'
 
-const URL = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11007"
+const URL = "http://localhost:5000/vineyards/products"
 
 const Wines = () => {
 
-    const [wines, setWines] = useState([])
-    // const { search } = useLocation()
-
+    const [wine, setWine] = useState([])
+    console.log(wine)
 
     useEffect(() => {
-        const fetchData = async () => {
-            const res = await axios.get(URL)
-            console.log(res.data)
-        }
         fetchData()
-    }, [wines])
+    }, [])
 
+    const fetchData = async () => {
+        const res = await axios.get(URL)
+        setWine(res.data.data.data)
+    }
 
     return (
-        <Container>
-            {/* {wine.map(w => ( */}
-            {/* <Wrapper key="">
-                {console.log(w)}
-                <Image src="" />
-                <Title> </Title>
-                <Info>edna valley 2018</Info>
-                <Button value="LEARN MORE" />
-            </Wrapper> */}
-            {/* ))} */}
-            <Link className="link" to="/product">
-                <Wrapper>
-                    <Image src='https://chamisalvineyards.com/wp-content/uploads/2018/06/CV-morrito-pinot-WP_705x214.png' />
-                    <Title>Morrito Pinot Noir </Title>
-                    <Info>edna valley 2018</Info>
-                    <Button value="LEARN MORE" />
-                </Wrapper>
-            </Link>
-            <Wrapper>
-                <Image src='https://chamisalvineyards.com/wp-content/uploads/2018/06/CV-morrito-pinot-WP_705x214.png' />
-                <Title>Morrito Pinot Noir </Title>
-                <Info>edna valley 2018</Info>
-                <Button value="LEARN MORE" />
-            </Wrapper>
-            <Wrapper>
-                <Image src='https://chamisalvineyards.com/wp-content/uploads/2018/06/CV-morrito-pinot-WP_705x214.png' />
-                <Title>Morrito Pinot Noir </Title>
-                <Info>edna valley 2018</Info>
-                <Button value="LEARN MORE" />
-            </Wrapper>
-            <Wrapper>
-                <Image src='https://chamisalvineyards.com/wp-content/uploads/2018/06/CV-morrito-pinot-WP_705x214.png' />
-                <Title>Morrito Pinot Noir </Title>
-                <Info>edna valley 2018</Info>
-                <Button value="LEARN MORE" />
-            </Wrapper>
-            <Wrapper>
-                <Image src='https://chamisalvineyards.com/wp-content/uploads/2018/06/CV-morrito-pinot-WP_705x214.png' />
-                <Title>Morrito Pinot Noir </Title>
-                <Info>edna valley 2018</Info>
-                <Button value="LEARN MORE" />
-            </Wrapper>
-            <Wrapper>
-                <Image src='https://chamisalvineyards.com/wp-content/uploads/2018/06/CV-morrito-pinot-WP_705x214.png' />
-                <Title>Morrito Pinot Noir </Title>
-                <Info>edna valley 2018</Info>
-                <Button value="LEARN MORE" />
-            </Wrapper>
-        </Container>
+        <>
+            {wine.map(wine => (
+                <Container key={wine._id}>
+                    <Link
+                        className="link"
+                        to={{
+                            pathname: `/product/${wine._id}`,
+                            state: { wineId: wine._id }
+                        }}>
+                        <Wrapper>
+                            <Image src={wine.photo} alt="zad" />
+                            <Title>{wine.title}</Title>
+                            <Info>{wine.info}</Info>
+                            <Button value="LEARN MORE" />
+                        </Wrapper>
+                    </Link>
+                </Container>
+            ))}
+        </>
     )
 }
 

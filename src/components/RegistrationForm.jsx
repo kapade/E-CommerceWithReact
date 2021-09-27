@@ -1,54 +1,117 @@
 import styled from "styled-components"
 import Button from './RegistrationButton'
+import { useState } from 'react'
+import Axios from 'axios'
+import { Link } from "react-router-dom"
 
 
 const RegistrationForm = () => {
+    const PF = "http://localhost:5000/vineyards/users/signup"
+    const [data, setData] = useState({
+        userName: "",
+        firstName: "",
+        lastName: "",
+        address: "",
+        city: "",
+        password: "",
+        confirmPassword: "",
+        zipCode: "",
+        phone: "",
+        mobile: "",
+        email: "",
+        date: ""
+    })
+
+    function submit(e) {
+        console.log('inside');
+        e.preventDefault()
+
+        console.log(data, '1post')
+        try {
+            console.log('inside axios');
+            // Axios.get(PF, {
+            //     userName: data.userName,
+            //     firstName: data.firstName,
+            //     lastName: data.lastName,
+            //     address: data.address,
+            //     city: data.city,
+            //     password: data.password,
+            //     confirmPassword: data.confirmPassword,
+            //     zipCode: data.zipCode,
+            //     phone: data.phone,
+            //     mobile: data.mobile,
+            //     email: data.email,
+            //     date: data.date
+            // })
+            Axios.post(PF, {
+                firstName: data.firstName,
+                lastName: data.lastName,
+            }).then(res => {
+                console.log(res)
+            })
+        } catch (error) {
+            console.log(error, 'catch');
+        }
+    }
+
+    function handle(e) {
+        const newdata = { ...data }
+        newdata[e.target.id] = e.target.value
+        setData(newdata)
+        // console.log(newdata, 'handle') //prints onChange
+    }
+
+    // I have given ID's to the elements below.
     return (
         <Container>
-            <Form onSubmit="">
+            <Form id="myForm" onSubmit={(e) => submit(e)}>
                 <FirstGroup>
                     <InputInfo>
-                        <Input type="text" placeholder="Username" />
+                        <Input onChange={(e) => handle(e)} value={data.email} id="email" type="email" placeholder="Email" />
                     </InputInfo>
                     <InputInfo>
-                        <Input type="text" placeholder="First Name" />
+                        <Input onChange={(e) => handle(e)} value={data.firstName} id="firstName" type="text" placeholder="First Name" />
                     </InputInfo>
                     <InputInfo>
-                        <Input type="text" placeholder="Last Name" />
+                        <Input onChange={(e) => handle(e)} value={data.lastName} id="lastName" type="text" placeholder="Last Name" />
                     </InputInfo>
                     <InputInfo>
-                        <Input type="text" placeholder="Address" />
+                        <Input onChange={(e) => handle(e)} value={data.address} id="address" type="text" placeholder="Address" />
                     </InputInfo>
                     <InputInfo>
-                        <Input type="text" placeholder="City" />
+                        <Input onChange={(e) => handle(e)} value={data.city} id="city" type="text" placeholder="City" />
                     </InputInfo>
-                    <InputInfo>
+                    {/* <InputInfo>
                         <Select>
                             <Option>Greece</Option>
                             <Option>Italy</Option>
                             <Option>Spain</Option>
                         </Select>
-                    </InputInfo>
+                    </InputInfo> */}
                 </FirstGroup>
-                <Button />
+                <Button>
+                    <Link to="/login">Login</Link>
+                </Button>
                 <SecondGroup>
                     <InputInfo>
-                        <Input type="password" placeholder="Password" />
+                        <Input onChange={(e) => handle(e)} value={data.password} id="password" type="password" placeholder="Password" />
                     </InputInfo>
                     <InputInfo>
-                        <Input type="number" placeholder="Zip Code" />
+                        <Input onChange={(e) => handle(e)} value={data.confirmPassword} id="confirmPassword" type="password" placeholder="Confirm Password" />
                     </InputInfo>
                     <InputInfo>
-                        <Input type="number" placeholder="Phone" />
+                        <Input onChange={(e) => handle(e)} value={data.zipCode} id="zipCode" type="number" placeholder="Zip Code" />
                     </InputInfo>
                     <InputInfo>
-                        <Input type="number" placeholder="Mobile Phone" />
+                        <Input onChange={(e) => handle(e)} value={data.phone} id="phone" type="number" placeholder="Phone" />
                     </InputInfo>
                     <InputInfo>
-                        <Input type="email" placeholder="Email" />
+                        <Input onChange={(e) => handle(e)} value={data.mobile} id="mobile" type="number" placeholder="Mobile Phone" />
                     </InputInfo>
                     <InputInfo>
-                        <Input type="date" placeholder="Email" />
+                    </InputInfo>
+                    <InputInfo>
+                        <Input onChange={(e) => handle(e)} value={data.date} id="date" type="date" placeholder="Email" />
                     </InputInfo>
                 </SecondGroup>
             </Form>
@@ -106,3 +169,4 @@ const Input = styled.input`
 `
 
 export default RegistrationForm
+

@@ -1,67 +1,133 @@
 {
-  "blogs": [
+  "wines": [
     {
       "title": "Opening Party!",
+      "info": "edna valley 2018",
       "body": "Why do we use it?\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).\n\n\nWhere does it come from?\nContrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.\n\nThe standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.\n\nWhere can I get some?\nThere are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.",
       "author": "yoshi",
       "pic": "https://chamisalvineyards.com/wp-content/uploads/2018/06/CV-morrito-pinot-WP_705x214.png",
-      "id": 2
+      "id": 2,
+      "date": "2000",
+      "price": "2000"
     },
     {
-      "title": "cvsdv",
+      "title": "4234234v",
+      "info": "edna valley 2016",
       "body": "vsdv",
       "author": "mario",
-      "pic": "",
-      "id": 7
+      "pic": "https://chamisalvineyards.com/wp-content/uploads/2018/06/CV-morrito-pinot-WP_705x214.png",
+      "id": 7,
+      "date": "2000",
+      "price": "2000"
     },
     {
-      "title": "cezc",
+      "title": "1111",
+      "info": "edna valley 2016",
       "body": "cezc",
       "author": "mario",
       "pic": "https://chamisalvineyards.com/wp-content/uploads/2018/06/CV-morrito-pinot-WP_705x214.png",
-      "id": 8
+      "id": 8,
+      "date": "2000",
+      "price": "2000"
     },
     {
       "title": "cezc",
+      "info": "edna valley 2018",
       "body": "cezc",
       "author": "mario",
       "pic": "https://chamisalvineyards.com/wp-content/uploads/2018/06/CV-morrito-pinot-WP_705x214.png",
-      "id": 9
+      "id": 9,
+      "date": "2000",
+      "price": "2000"
     },
     {
       "title": "cezc",
+      "info": "edna valley 2018",
       "body": "cezc",
       "author": "mario",
       "pic": "https://chamisalvineyards.com/wp-content/uploads/2018/06/CV-morrito-pinot-WP_705x214.png",
-      "id": 10
+      "id": 10,
+      "date": "2000"
     },
     {
       "title": "cezc",
+      "info": "edna valley 2018",
       "body": "cezc",
       "author": "mario",
       "pic": "https://chamisalvineyards.com/wp-content/uploads/2018/06/CV-morrito-pinot-WP_705x214.png",
-      "id": 11
+      "id": 11,
+      "date": "2000"
     },
     {
       "title": "cezc",
+      "info": "edna valley 2018",
       "body": "cezc",
       "author": "mario",
       "pic": "https://chamisalvineyards.com/wp-content/uploads/2018/06/CV-morrito-pinot-WP_705x214.png",
-      "id": 12
+      "id": 12,
+      "date": "2000"
     },
     {
       "title": "cezc",
+      "info": "edna valley 2018",
       "body": "cezc",
       "author": "mario",
       "pic": "https://chamisalvineyards.com/wp-content/uploads/2018/06/CV-morrito-pinot-WP_705x214.png",
-      "id": 13
+      "id": 13,
+      "date": "2000"
     },
     {
       "title": "czec",
+      "info": "edna valley 2018",
       "body": "cezc",
       "author": "mario",
       "pic": "https://chamisalvineyards.com/wp-content/uploads/2018/06/CV-morrito-pinot-WP_705x214.png",
-      "id": 14
+      "id": 14,
+      "date": "2000"
+    },
+    {
+      "amount": 1000,
+      "id": "pm_1JdfIXDwqxNQKhKwUrSr9ArE"
+    },
+    {
+      "amount": 1000,
+      "id": "pm_1JdinoDwqxNQKhKwKu9qIHQ0"
+    },
+    {
+      "proxy": "http://localhost:8000/blogs"
+    },
+    {
+      "amount": 1000,
+      "id": "pm_1Jdy5uDwqxNQKhKwcFPHyFm4"
+    },
+    {
+      "userName": "ezezc",
+      "firstName": "alekos",
+      "lastName": "zczec",
+      "address": "zczecz",
+      "city": "czeczec",
+      "password": "alekos",
+      "zipCode": "12",
+      "phone": "12",
+      "mobile": "12",
+      "email": "alekos@alekos.com",
+      "date": "2021-09-14",
+      "id": 15
+    },
+    {
+      "userName": "",
+      "firstName": "azd",
+      "lastName": "dzadd",
+      "address": "dazd",
+      "city": "dazd",
+      "password": "123456789",
+      "confirmPassword": "123456789",
+      "zipCode": "1212",
+      "phone": "212",
+      "mobile": "1212121",
+      "email": "alekos@alekos.com",
+      "date": "2021-09-28",
+      "id": 16
     }
   ]
 }

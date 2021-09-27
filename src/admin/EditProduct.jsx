@@ -3,12 +3,14 @@ import AddIcon from '@material-ui/icons/Add';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useHistory, useLocation } from "react-router";
-// import WineRouge from '../../public/images/home_wine_1_compressed.jpg'
 
-const PF = "http://localhost:5000/vineyards/products"
-
-const AddProduct = () => {
-
+const EditProduct = () => {
+    const location = useLocation()
+    const path = location.pathname.split("/")[2]
+    const id = location.state?.wineId
+    const [wine, setWine] = useState([])
+    const PF = "http://localhost:5000/vineyards/products"
+    // const { user } = useContext(Context)
     const [title, setTitle] = useState("")
     const [year, setYear] = useState("")
     const [price, setPrice] = useState("")
@@ -16,19 +18,54 @@ const AddProduct = () => {
     const [aroma, setAroma] = useState("")
     const [flavor, setFlavor] = useState("")
     const [finish, setFinish] = useState("")
-    // const location = useLocation()
-    // const path = location.pathname.split("/")[2]
+    const [updateMode, setUpdateMode] = useState(false)
     const history = useHistory()
 
 
+    // fix error with message!!!!!!!
 
 
-    const handleSubmit = e => {
+    useEffect(() => {
+        const fetchWine = async () => {
+            const res = await axios.get(`${PF}/${path}`)
+            console.log(res)
+            setWine(res.data.data.data)
+            setTitle(res.data.data.data.title)
+            setYear(res.data.data.data.year)
+            setPrice(res.data.data.data.price)
+            setAlcohol(res.data.data.data.alcohol)
+            setAroma(res.data.data.data.aroma)
+            setFlavor(res.data.data.data.flavor)
+            setFinish(res.data.data.data.finish)
+        }
+        fetchWine()
+    }, [path])
+
+
+    // const handleDelete = async () => {
+    //     try {
+    //         await axios.delete('/blogs/' + path)
+    //         window.location.replace('/')
+    //     } catch (error) {
+    //         console.log("You didn't delete! Try again")
+    //     }
+    // }
+
+    // const handleUpdate = async () => {
+    //     try {
+    //         await axios.put('/blogs/' + path) &
+    //             setUpdateMode(false)
+    //     } catch (error) {
+    //         console.log("You didn't delete! Try again")
+    //     }
+    // }
+
+    const handleUpdate = e => {
         e.preventDefault()
         const wine = { title, year, price, alcohol, aroma, flavor, finish }
 
-        fetch(PF, {
-            method: 'POST',
+        fetch(`${PF}/${path}`, {
+            method: 'PATCH',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(wine)
         }).then(() => {
@@ -40,8 +77,12 @@ const AddProduct = () => {
     return (
         <BackgroundPhoto>
             <Container>
-                {/* <WineImage src="https://chamisalvineyards.com/wp-content/uploads/2018/06/CV-morrito-pinot-WP_705x214.png" /> */}
-                <Form onSubmit={handleSubmit}>
+                {wine.photo && (
+                    <WineImage src={PF + wine.photo} />
+                )} {
+
+                }
+                <Form onSubmit={handleUpdate}>
                     <WriteFormGroup>
                         <LabelPlus htmlFor="fileInput">
                             <BackgroundCircle>
@@ -51,20 +92,13 @@ const AddProduct = () => {
                         </LabelPlus>
                     </WriteFormGroup>
                     <WriteFormGroup>
-                        <InputFile
-                            type="file"
-                            id="fileInput"
-                        // required
-                        // value={title}
-                        // onChange={e => setTitle(e.target.value)}
-                        />
+                        <InputFile type="file" id="fileInput" />
                     </WriteFormGroup>
                     <WriteFormGroup>
                         <Input
                             type="text"
                             placeholder="Title"
                             autoFocus={true}
-                            required
                             value={title}
                             onChange={e => setTitle(e.target.value)}
                         />
@@ -74,7 +108,6 @@ const AddProduct = () => {
                             type="number"
                             placeholder="Year"
                             autoFocus={true}
-                            required
                             value={year}
                             onChange={e => setYear(e.target.value)}
                         />
@@ -84,17 +117,15 @@ const AddProduct = () => {
                             type="number"
                             placeholder="Price"
                             autoFocus={true}
-                            required
                             value={price}
                             onChange={e => setPrice(e.target.value)}
                         />
                     </WriteFormGroup>
                     <WriteFormGroup>
                         <Input
-                            type="text"
+                            type="number"
                             placeholder="Alcohol"
                             autoFocus={true}
-                            required
                             value={alcohol}
                             onChange={e => setAlcohol(e.target.value)}
                         />
@@ -104,7 +135,6 @@ const AddProduct = () => {
                             type="text"
                             placeholder="Aroma"
                             autoFocus={true}
-                            required
                             value={aroma}
                             onChange={e => setAroma(e.target.value)}
                         />
@@ -127,8 +157,10 @@ const AddProduct = () => {
                             onChange={e => setFinish(e.target.value)}
                         />
                     </WriteFormGroup>
-
-                    <Button type="submit">Publish</Button>
+                    <WriteFormGroup>
+                        <Button type="submit">Update</Button>
+                        {/* <Button type="submit">Delete</Button> */}
+                    </WriteFormGroup>
                 </Form>
             </Container>
         </BackgroundPhoto>
@@ -194,7 +226,10 @@ const Text = styled.span`
 `
 
 const WriteFormGroup = styled.div`
-    
+    &:nth-last-child(1){
+        display: flex;
+        justify-content: space-between;
+    }
 `
 
 const InputFile = styled.input`
@@ -216,20 +251,36 @@ const Input = styled.input`
 `
 
 const Button = styled.button`
-    padding: 15px;
-    border-radius: 10px;
-    border: 3px solid var(--color-brown);
-    background-color: #fff;
-    color: gray;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
     font-weight: 500;
     letter-spacing: 1px;
     text-transform: uppercase;
+    background-color: lightblue;
+
 
     &:hover{
         cursor: pointer;
+        color: lightblue;
+        background-color: #fff;
+        border: 3px solid lightblue;
+    }
+
+    &:nth-last-child(1){
+        border: 3px solid coral;
+        background-color: #fff;
+        color: coral;
+
+        &:hover{
+        cursor: pointer;
+        color: lightblue;
+        background-color: coral;
         color: #fff;
-        background-color: var(--color-brown);
+    }
     }
 `
 
-export default AddProduct
+export default EditProduct

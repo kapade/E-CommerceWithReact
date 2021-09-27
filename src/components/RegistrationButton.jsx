@@ -3,7 +3,7 @@ import styled from 'styled-components'
 const RegistrationButton = () => {
     return (
         <Container>
-            <Button type="submit" onClick="">sign up</Button>
+            <Button type="submit">sign up</Button>
         </Container>
     )
 }
