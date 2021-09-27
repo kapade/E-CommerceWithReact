@@ -1,5 +1,6 @@
 import { Facebook, Instagram } from '@material-ui/icons'
 import styled from 'styled-components'
+import "../index.css"
 
 const Footer = () => {
     return (
@@ -18,7 +19,7 @@ const Footer = () => {
                     <Face><Facebook /></Face>
                 </Social>
             </Logo>
-            <Links>
+            <Links className="footerLinks">
                 <Title>RESOURCES</Title>
                 <Link>Store Locator</Link>
                 <Link>Trade & Media</Link>

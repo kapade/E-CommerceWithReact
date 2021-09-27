@@ -36,7 +36,7 @@ html, body {
     background-color: #3f8079;
 }
 
-a {
+.listItems > a {
     margin-left: 10px;
     color: #B8B4AB;
     text-decoration: none;
@@ -47,7 +47,7 @@ a {
     font-family: "Requiem Text-HTF",serif;
     opacity: 0.8;
 }
-a:hover{
+.listItems > a:hover{
     color: #d4d0c3;
     
 }
@@ -76,5 +76,11 @@ ul{
     height: 100vh !important;
 }
 
+.footerLinks{
+    margin-left: 10px;
+    color: #3f8079;
+}
 
-
+.footerLinks:hover {
+    color: #7da3a0;
+}

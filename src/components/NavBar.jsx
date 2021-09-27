@@ -110,23 +110,23 @@ export default function NavBar() {
             onClose={toggleDrawer(anchor, false)}
             onOpen={toggleDrawer(anchor, true)}
           >
-             <List style={{position:"relative"}} >
-               <Lines/>\
+             <List style={{position:"relative"}}>
+               <Lines/>
                <Toggle>
             <Button ><ShoppingCartOutlined onClick={shopFunc} style={ToggleStyles}/></Button>
             <CancelOutlined  style={ToggleStyles} onClick={toggleDrawer(anchor, false)}/>
             </Toggle>
-            <ListItem onClick={handleClose}>
+            <ListItem onClick={handleClose} className="listItems">
               {" "}
               <a href="/">HOME</a>
             </ListItem>
-            <ListItem onClick={handleClose}>
+            <ListItem onClick={handleClose} className="listItems">
               <a href="/shop">SHOP</a>
             </ListItem>
-            <ListItem onClick={handleClose}>
+            <ListItem onClick={handleClose} className="listItems">
               <a href="/login">LOGIN</a>
             </ListItem>
-            <ListItem onClick={handleClose}>
+            <ListItem onClick={handleClose} className="listItems">
               <a href="/registration">REGISTRATION</a>
             </ListItem>
             <Social>
