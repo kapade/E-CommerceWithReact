@@ -4,8 +4,15 @@ import Button from './Button'
 import { Link } from "react-router-dom"
 
 
-const ShoppingModal = () => {
-
+const ShoppingModal = (props) => {
+    const rows = props.items.map((item) => {
+        return (<TableRow>
+            <TableCell>{item.img}</TableCell>
+            <TableCell>{item.title}</TableCell>
+            <TableCell>{item.price}</TableCell>
+            <TableCell>{item.price*item.total}</TableCell>
+        </TableRow>);
+    })
 
     return (
         <Container>
@@ -23,6 +30,7 @@ const ShoppingModal = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
+                    {rows}
                     <TableRow>
                         <TableCell>1</TableCell>
                         <TableCell><Img src="https://chamisalvineyards.com/wp-content/uploads/2018/06/CV-morrito-pinot-WP_705x214.png" alt="" /></TableCell>

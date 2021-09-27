@@ -62,6 +62,14 @@ const Product = () => {
         history.push('/shop')
     }
 
+    const [items,setItems] = useState([
+        {img:"",
+        title: "",
+        price: "",
+        total:""
+        }
+    ]) 
+
     return (
         <ProductWrapper>
             <Link to="/shop">
@@ -91,7 +99,7 @@ const Product = () => {
                                 <Option value="11">11</Option>
                                 <Option value="12">12</Option>
                             </Select>
-                            <Button className="actionButton" value="PURCHASE"></Button>
+                            <Button className="actionButton" value="PURCHASE" onClick={setModalIsOpenToTrue}></Button>
                             {/* <Button onClick={handleDelete} className="actionButton" value={value} ></Button> */}
                             <ButtonDelete onClick={handleDelete}>DELETE</ButtonDelete>
                             <Link
@@ -117,7 +125,7 @@ const Product = () => {
                         <ModalContainer>
                             <Modal style={customStyles} isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}>
                                 <ButtonClose onClick={setModalIsOpenToFalse}>x</ButtonClose>
-                                <ShoppingModal />
+                                <ShoppingModal items={items}/>
                             </Modal>
                         </ModalContainer>
                     </Wrapper>

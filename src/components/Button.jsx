@@ -1,9 +1,9 @@
 import styled from "styled-components"
 
-const Button = ({ value }) => {
+const Button = ({ value,onClick }) => {
     return (
         <div>
-            <PrimaryButton>{value}</PrimaryButton>
+            <PrimaryButton onClick={onClick}>{value}</PrimaryButton>
         </div>
     )
 }
