@@ -48,8 +48,8 @@ const Login = () => {
                     <Button type="submit" disabled={isFetching}>log in</Button>
                 </Form>
                 <LinksForActions>
-                    <Link style={links} to="/forgotPassword">Forgot your username or password? </Link>
-                    <Link style={links} to="/registration">Sign up for an account</Link>
+                    <Link style={links} to="/forgotPassword" >Forgot your username or password? </Link>
+                    <Link style={links} to="/registration" >Sign up for an account</Link>
                 </LinksForActions>
             </Container>
         </BackImage>
@@ -166,7 +166,10 @@ const LinksForActions = styled.div`
 `
 
 const links = {
-    marginBottom: '10px'
+    marginBottom: '10px',
+    letterSpacing: "1px",
+    color: "black",
+    backgroundColor: "transparent"
 }
 
 export default Login
