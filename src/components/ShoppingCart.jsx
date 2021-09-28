@@ -7,6 +7,7 @@ import Modal from 'react-modal';
 import '../index.css'
 
 const ShoppingCart = () => {
+    const [showItem, setShowItem] = useState(false)
     const [modalIsOpen, setModalIsOpen] = useState(false)
 
     const setModalIsOpenToTrue = () => {
@@ -59,7 +60,7 @@ const ShoppingCart = () => {
             </WrapperTable>
             <WrapperCart>
                 <Payment src="https://i.ibb.co/Qfvn4z6/payment.png" />
-                <Paymentbutton onClick={setModalIsOpenToTrue}>PAYMENT WITH CART</Paymentbutton>
+                <Paymentbutton onClick={setModalIsOpenToTrue}>PAYMENT WITH CARD</Paymentbutton>
                 <ModalContainer>
                     <Modal style={customStyles} isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)}>
                         <ButtonClose onClick={setModalIsOpenToFalse}>x</ButtonClose>

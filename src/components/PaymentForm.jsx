@@ -1,28 +1,28 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js"
 import axios from "axios"
-import { useEffect } from "react"
+// import { useEffect } from "react"  
 import { useState } from "react"
 import styled from "styled-components"
 import PaymentSuccessMessage from "./PaymentSuccessMessage"
 
 const CARD_OPTIONS = {
-    iconStyle: "solid",
-    style: {
-        base: {
-            iconColor: "#c4f0ff",
-            color: "#fff",
-            fontWeight: 500,
-            fontFamily: "Roboto, Open Sans, Segoe UI, sans-serif",
-            fontSize: "16px",
-            fontSmoothing: "antialiased",
-            ":-webkit-autofill": { color: "#fce883" },
-            "::placeholder": { color: "#87bbfd" }
-        },
-        invalid: {
-            iconColor: "red",
-            color: "red"
-        }
-    }
+	iconStyle: "solid",
+	style: {
+		base: {
+			iconColor: "#c4f0ff",
+			color: "#fff",
+			fontWeight: 500,
+			fontFamily: "Roboto, Open Sans, Segoe UI, sans-serif",
+			fontSize: "16px",
+			fontSmoothing: "antialiased",
+			":-webkit-autofill": { color: "#fce883" },
+			"::placeholder": { color: "#87bbfd" }
+		},
+		invalid: {
+			iconColor: "#ffc7ee",
+			color: "#ffc7ee"
+		}
+	}
 }
 
 const PaymentForm = () => {
@@ -45,7 +45,7 @@ const PaymentForm = () => {
                     id
                 })
 
-                if (response.data) {
+                if (response.data.success) {
                     console.log("Successful payment")
                     setSuccess(true)
                 }
@@ -95,6 +95,7 @@ const FormGroup = styled.div`
 `
 
 const FormRow = styled.div`
+    display: -ms-flexbox;
 	display: flex;
 	align-items: center;
     color: red;

@@ -36,6 +36,12 @@ html, body {
     background-color: #3f8079;
 }
 
+a,span {
+    text-decoration: none;
+    text-align: center;
+    margin:2px;
+}
+
 .listItems > a {
     margin-left: 10px;
     color: #B8B4AB;
@@ -54,7 +60,7 @@ html, body {
 
 ul{
     background-color: #4e4540;
-    height: 80vh;
+    height: 100vh;
 }
 .menu{
     height: 100vh;
@@ -74,6 +80,7 @@ ul{
 
 .css-h4y409-MuiList-root{
     height: 100vh !important;
+    overflow-x: hidden;
 }
 
 .footerLinks{

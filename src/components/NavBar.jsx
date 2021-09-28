@@ -4,12 +4,11 @@ import {
   MenuOutlined,
 } from "@material-ui/icons";
 import React from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import "../index.css";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
+import { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { CancelOutlined } from "@material-ui/icons";
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
@@ -20,6 +19,7 @@ import { Button } from "@material-ui/core";
 import { Lines } from "./Lines";
 import { Facebook } from "@material-ui/icons";
 import { Instagram } from "@material-ui/icons";
+import { Context } from "../context/Context";
 
 const useStyles = makeStyles({
   menuItem: {
@@ -28,6 +28,11 @@ const useStyles = makeStyles({
 });
 
 export default function NavBar() {
+  const { user, admin, dispatch } = useContext(Context)
+  console.log(user?.firstName ?? "N/A")
+  const handleLogout = () => {
+    dispatch({ type: 'LOGOUT' })
+  }
   const [state, setState] = React.useState({
     right: false,
   });
@@ -95,12 +100,17 @@ export default function NavBar() {
       <Wrapper>
         <Left>
           <ShoppingCartOutlined onClick={shopFunc}/>
+         
         </Left>
         <Center>
           <Logo onClick={homeFunc}>CHAMISAL</Logo>
           <LogoSmall>VINEYARDS</LogoSmall>
         </Center>
         <Right>
+        <Router>
+          <Link to='/' onClick={handleLogout}>{user  && "LOGOUT"}</Link>
+          <span >HELLO {user?.firstName ?? "N/A"}</span>
+          </Router>
           {['right'].map((anchor) => (
         <React.Fragment key={anchor}>
           <MenuOutlined onClick={toggleDrawer(anchor, true)} />
@@ -167,7 +177,6 @@ const Left = styled.div`
   justify-content: center;
 `;
 
-const Shop = styled.div``;
 
 const Center = styled.div`
   flex: 1;
@@ -179,6 +188,9 @@ const Logo = styled.h1`
   font-weight: bold;
   letter-spacing: 0.2em;
   cursor: pointer;
+  display:flex;
+  align-items: center;
+  justify-content: center; 
 `;
 const LogoSmall = styled.h3`
   color: #808080;
@@ -203,5 +215,4 @@ align-items: center;
 justify-content: center;
 margin-top: 50px;
 `;
-
 

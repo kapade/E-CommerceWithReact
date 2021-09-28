@@ -4,26 +4,23 @@ import { Context } from '../context/Context'
 import styled from 'styled-components'
 import axios from "axios";
 
-const PF = "http://localhost:5000/vineyards/products"
-
 const Login = () => {
 
     const emailRef = useRef()
     const passwordRef = useRef()
     const { dispatch, isFetching } = useContext(Context)
-    console.log(emailRef)
-    console.log(passwordRef)
-    console.log(dispatch)
 
     const handleSubmit = async e => {
         e.preventDefault()
         dispatch({ type: 'LOGIN_START' })
         try {
-            const res = await axios.post('http://localhost:5000/api/users/login', {
+
+            const res = await axios.post('http://localhost:5000/vineyards/users/login', {
                 email: emailRef.current.value,
                 password: passwordRef.current.value,
             })
-            dispatch({ type: 'LOGIN_SUCCESS', payload: res.data })
+            console.log(res.data.data.user.role)
+            dispatch({ type: 'LOGIN_SUCCESS', payload: res.data.data.user })
         } catch (error) {
             dispatch({ type: 'LOGIN_FAILURE' })
         }

@@ -1,22 +1,17 @@
-import {
-  ArrowBackSharp,
-  Height,
-  ShoppingBasketOutlined,
-} from "@material-ui/icons";
+import { ArrowBackSharp, ShoppingBasketOutlined } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Button from "./Button";
 import "../index.css";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import { useHistory, useLocation } from "react-router";
-import useFetch from "../tools/useEffect";
+// import useFetch from "../tools/useEffect";
 import NotFound from "./NotFound";
 import Modal from "react-modal";
-import ShoppingCart from "./ShoppingCart";
 import ShoppingModal from "./ShoppingModal";
-import Context from "../context/Context";
+import { Context } from "../context/Context";
 
 const Product = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -42,7 +37,7 @@ const Product = () => {
   const fetchData = async () => {
     try {
       const res = await axios.get(PF);
-      console.log(res.data.data.data);
+      // console.log(res.data.data.data);
       setWineData(res.data.data.data);
     } catch (error) {
       console.log("Wrong data");
@@ -54,7 +49,7 @@ const Product = () => {
   }, []);
 
   const product = wineData.find((p) => p._id == id);
-  console.log(product);
+  // console.log(product);
 
   /*  */
 
@@ -66,6 +61,9 @@ const Product = () => {
     history.push("/shop");
   };
 
+  const { user } = useContext(Context);
+  console.log(user?.role ?? "N/A");
+
   const [items, setItems] = useState([
     {
       quan: "",
@@ -75,6 +73,12 @@ const Product = () => {
       total: "",
     },
   ]);
+
+// const [subTotal, setsubTotal] = useState([0]); 
+// setsubTotal()={
+//   subTotal + total*quan
+// }
+
   const purchasedProduct = () => {
     setItems([
       ...items,
@@ -83,15 +87,20 @@ const Product = () => {
         img: product.photo,
         title: product.title,
         price: product.price,
-        total: items.total,
+        total: product.quan*product.price,
       },
     ]);
   };
-    
-const [options, setOptions] = useState([1])
-const selectedOption = () => {
-    setOptions([options])
-}
+
+  // const [options, setOptions] = useState([1]);
+  //  this.state = {quan:1}
+  
+  //  const selectedOption = (e) => {
+  //   this.state({quan:e.target.value})
+  // };
+  // this.selectedOption = this.selectedOption.bind(this);
+
+
   return (
     <ProductWrapper>
       <Link to="/shop">
@@ -108,7 +117,7 @@ const selectedOption = () => {
             <Title>{product.title}</Title>
             <Price>{product.price}</Price>
             <Actions>
-              <Select options={options}>
+              <Select >
                 {/* fix stock */}
                 <Option value="1">1</Option>
                 <Option value="2">2</Option>
@@ -129,17 +138,21 @@ const selectedOption = () => {
                 onClick={setModalIsOpenToTrue}
               ></Button>
               {/* <Button onClick={handleDelete} className="actionButton" value={value} ></Button> */}
-              <ButtonDelete onClick={handleDelete}>DELETE</ButtonDelete>
-              <Link
-                key={product._id}
-                className="link"
-                to={{
-                  pathname: `/edit/${product._id}`,
-                  state: { wineId: product._id },
-                }}
-              >
-                <Button className="actionButton" value="EDIT"></Button>
-              </Link>
+              {user && (
+                <>
+                  <ButtonDelete onClick={handleDelete}>DELETE</ButtonDelete>
+                  <Link
+                    key={product._id}
+                    className="link"
+                    to={{
+                      pathname: `/edit/${product._id}`,
+                      state: { wineId: product._id },
+                    }}
+                  >
+                    <Button className="actionButton" value="EDIT"></Button>
+                  </Link>
+                </>
+              )}
             </Actions>
             <SmallTitle>Aromas</SmallTitle>
             <SmallDesc>{product.aroma}</SmallDesc>

@@ -1,10 +1,10 @@
 import Button from '../../components/Button'
 import styled from 'styled-components'
 import { useEffect, useState } from 'react'
-import { useLocation } from 'react-router'
+// import { useLocation } from 'react-router'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import Product from '../../components/Product'
+// import Product from '../../components/Product'
 
 const URL = "http://localhost:5000/vineyards/products"
 
@@ -47,11 +47,11 @@ const Wines = () => {
 
 const Container = styled.div`
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     width: 80%;
     margin: 0 auto;
+    flex-wrap: wrap;
 `
 
 const Wrapper = styled.div`

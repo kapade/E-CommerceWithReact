@@ -49,9 +49,9 @@ const ShoppingModal = (props) => {
                 </TableBody>
             </Table>
             <WrapperButtonSubTotal>
-                <SubTotal>SUBTOTAL  &nbsp;  €121212</SubTotal>
-                <Link style={{ textDecoration: 'none' }} to='/showCard'>
-                    <Button value="VIEW CART">VIEW CART</Button>
+                <SubTotal>SUBTOTAL  &nbsp;</SubTotal>
+                <Link style={{ textDecoration: 'none' }} to='/basket'>
+                    <Button value="VIEW CART" >VIEW CART</Button>
                 </Link>
             </WrapperButtonSubTotal>
         </Container>

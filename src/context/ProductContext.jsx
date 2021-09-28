@@ -1,16 +1,16 @@
 import { createContext, useEffect, useReducer } from 'react'
 import Reducer from './Reduser'
 
-const INITIAL_STATE = {
-    user: JSON.parse(localStorage.getItem('user')) || 'visitor',
-    isFetching: false,
-    error: false,
-}
+// const INITIAL_STATE = {
+//     user: JSON.parse(localStorage.getItem('user')) || 'visitor',
+//     isFetching: false,
+//     error: false,
+// }
 
-export const Context = createContext(INITIAL_STATE)
+export const ProductContext = createContext();
 
-export const ContextProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(Reducer, INITIAL_STATE)
+export const ProductContextProvider = ({props }) => {
+    const [products, dispatch] = useReducer(ProductReducer, [])
 
     useEffect(() => {
         localStorage.setItem('user', JSON.stringify(state.user))

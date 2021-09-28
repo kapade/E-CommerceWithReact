@@ -12,63 +12,69 @@ import ShoppingCart from './components/ShoppingCart';
 import ForgotPassword from './pages/ForgotPassword';
 import NotFound from './components/NotFound';
 import EditProduct from './admin/EditProduct';
-import React, { Component } from 'react';
+import React, { Component, useContext } from 'react';
 import About from './pages/about/About';
+import { Context } from './context/Context';
 
 
 
-class App extends Component {
 
-  render() {
-    return (
-      <div className="App">
-        {/* Announcement */}
-        <NavBar />
-        <Router>
-          <Switch>
-            <Route exact path="/" >
-              <Home />
-            </Route>
-            <Route path="/shop" >
-              <Shop />
-            </Route>
-            <Route path="/product" >
-              <Product />
-            </Route>
-            <Route path="/login" >
-              <Login />
-            </Route>
-            <Route path="/registration" >
-              <RegistrationForm />
-            </Route>
-            <Route path="/add" >
-              <AddProduct />
-            </Route>
-            <Route path="/edit">
-              <EditProduct />
-            </Route>
-            <Route path="/basket" >
-              <ShoppingCart />
-            </Route>
-            <Route path="/forgotPassword" >
-              <ForgotPassword />
-            </Route>
-            <Route path="/about" >
-              <About />
-            </Route>
-            <Route path="/*" >
-              <NotFound />
-            </Route>
-            {/* <Route path="/registration/:data">
-              <PrintData />
-            </Route> */}
-          </Switch>
-        </Router>
-        <Footer />
-      </div>
-    )
-  }
+const App = () => {
+  const { user, admin } = useContext(Context)
+  console.log(user)
+  return (
+    <div className="App">
+      {/* Announcement */}
+      <NavBar />
+      <Router>
+        <Switch>
+          <Route exact path="/" >
+            <Home />
+          </Route>
+          <Route path="/shop" >
+            <Shop />
+          </Route>
+          <Route path="/product" >
+            <Product />
+          </Route>
+          <Route path="/login" >
+            {user ? <Home /> : <Login />}
+            {/* <Login /> */}
+          </Route>
+          <Route path="/registration" >
+            {user ? <Home /> : <RegistrationForm />}
+            {/* <RegistrationForm /> */}
+          </Route>
+          <Route path="/add" >
+            {admin ? <Home /> : <AddProduct />}
+            {/* <AddProduct /> */}
+          </Route>
+          <Route path="/edit">
+            {admin ? <Home /> : <EditProduct />}
+            {/* <EditProduct /> */}
+          </Route>
+          <Route path="/basket" >
+            <ShoppingCart />
+          </Route>
+          <Route path="/forgotPassword" >
+            <ForgotPassword />
+          </Route>
+          <Route path="/about" >
+            <About />
+          </Route>
+          <Route path="/*" >
+            <NotFound />
+          </Route>
+          {/* <Route path="/registration/:data">
+            <PrintData />
+          </Route> */}
+        </Switch>
+      </Router>
+      <Footer />
+    </div>
+  )
 }
+
 
 // function PrintData() {
 //   let { data } = useParams();

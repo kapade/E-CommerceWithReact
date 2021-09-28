@@ -6,6 +6,7 @@ import { Link } from "react-router-dom"
 
 
 const RegistrationForm = () => {
+    // const history = useHistory()
     const PF = "http://localhost:5000/vineyards/users/signup"
     const [data, setData] = useState({
         userName: "",
@@ -14,12 +15,13 @@ const RegistrationForm = () => {
         address: "",
         city: "",
         password: "",
-        confirmPassword: "",
+        passwordConfirm: "",
         zipCode: "",
         phone: "",
-        mobile: "",
+        mobilePhone: "",
         email: "",
-        date: ""
+        dateOfBirth: "",
+        country: ""
     })
 
     function submit(e) {
@@ -29,26 +31,22 @@ const RegistrationForm = () => {
         console.log(data, '1post')
         try {
             console.log('inside axios');
-            // Axios.get(PF, {
-            //     userName: data.userName,
-            //     firstName: data.firstName,
-            //     lastName: data.lastName,
-            //     address: data.address,
-            //     city: data.city,
-            //     password: data.password,
-            //     confirmPassword: data.confirmPassword,
-            //     zipCode: data.zipCode,
-            //     phone: data.phone,
-            //     mobile: data.mobile,
-            //     email: data.email,
-            //     date: data.date
-            // })
-            Axios.post(PF, {
+            Axios.post("http://localhost:5000/vineyards/users/signup", {
+                userName: data.userName,
                 firstName: data.firstName,
                 lastName: data.lastName,
-            }).then(res => {
-                console.log(res)
+                address: data.address,
+                city: data.city,
+                password: data.password,
+                passwordConfirm: data.passwordConfirm,
+                zipCode: data.zipCode,
+                phone: data.phone,
+                mobilePhone: data.mobilePhone,
+                email: data.email,
+                dateOfBirth: data.dateOfBirth,
+                country: data.country
             })
+            // history.
         } catch (error) {
             console.log(error, 'catch');
         }
@@ -64,8 +62,11 @@ const RegistrationForm = () => {
     // I have given ID's to the elements below.
     return (
         <Container>
-            <Form id="myForm" onSubmit={(e) => submit(e)}>
+            <Form id="myForm" onSubmit={submit}>
                 <FirstGroup>
+                    <InputInfo>
+                        <Input onChange={(e) => handle(e)} value={data.userName} id="userName" type="text" placeholder="userName" />
+                    </InputInfo>
                     <InputInfo>
                         <Input onChange={(e) => handle(e)} value={data.email} id="email" type="email" placeholder="Email" />
                     </InputInfo>
@@ -81,13 +82,14 @@ const RegistrationForm = () => {
                     <InputInfo>
                         <Input onChange={(e) => handle(e)} value={data.city} id="city" type="text" placeholder="City" />
                     </InputInfo>
-                    {/* <InputInfo>
-                        <Select>
+                    <InputInfo>
+                        <Input onChange={(e) => handle(e)} type="text" value={data.country} id="country" />
+                        {/* <Select>
                             <Option>Greece</Option>
                             <Option>Italy</Option>
                             <Option>Spain</Option>
-                        </Select>
-                    </InputInfo> */}
+                        </Select> */}
+                    </InputInfo>
                 </FirstGroup>
                 <Button>
                     <Link to="/login">Login</Link>
@@ -97,7 +99,7 @@ const RegistrationForm = () => {
                         <Input onChange={(e) => handle(e)} value={data.password} id="password" type="password" placeholder="Password" />
                     </InputInfo>
                     <InputInfo>
-                        <Input onChange={(e) => handle(e)} value={data.confirmPassword} id="confirmPassword" type="password" placeholder="Confirm Password" />
+                        <Input onChange={(e) => handle(e)} value={data.passwordConfirm} id="passwordConfirm" type="password" placeholder="Confirm Password" />
                     </InputInfo>
                     <InputInfo>
                         <Input onChange={(e) => handle(e)} value={data.zipCode} id="zipCode" type="number" placeholder="Zip Code" />
@@ -106,12 +108,10 @@ const RegistrationForm = () => {
                         <Input onChange={(e) => handle(e)} value={data.phone} id="phone" type="number" placeholder="Phone" />
                     </InputInfo>
                     <InputInfo>
-                        <Input onChange={(e) => handle(e)} value={data.mobile} id="mobile" type="number" placeholder="Mobile Phone" />
+                        <Input onChange={(e) => handle(e)} value={data.mobilePhone} id="mobilePhone" type="number" placeholder="Mobile Phone" />
                     </InputInfo>
                     <InputInfo>
-                    </InputInfo>
-                    <InputInfo>
-                        <Input onChange={(e) => handle(e)} value={data.date} id="date" type="date" placeholder="Email" />
+                        <Input onChange={(e) => handle(e)} value={data.dateOfBirth} id="dateOfBirth" type="date" placeholder="Email" />
                     </InputInfo>
                 </SecondGroup>
             </Form>
