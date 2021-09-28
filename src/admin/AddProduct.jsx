@@ -1,9 +1,9 @@
 import styled from "styled-components"
 import AddIcon from '@material-ui/icons/Add';
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useHistory, useLocation } from "react-router";
-// import WineRouge from '../../public/images/home_wine_1_compressed.jpg'
+import { Context } from "../context/Context";
 
 const PF = "http://localhost:5000/vineyards/products"
 
@@ -16,6 +16,8 @@ const AddProduct = () => {
     const [aroma, setAroma] = useState("")
     const [flavor, setFlavor] = useState("")
     const [finish, setFinish] = useState("")
+    const [file, setFile] = useState(null)
+    const { user } = useContext(Context)
     // const location = useLocation()
     // const path = location.pathname.split("/")[2]
     const history = useHistory()
@@ -23,24 +25,52 @@ const AddProduct = () => {
 
 
 
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault()
-        const wine = { title, year, price, alcohol, aroma, flavor, finish }
-
-        fetch(PF, {
-            method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(wine)
-        }).then(() => {
-            console.log('new wine added')
+        const newWine = { title, year, price, alcohol, aroma, flavor, finish }
+        if (file) {
+            const data = new FormData()
+            const filename = Date.now() + file.name
+            data.append("name", filename)
+            data.append("file", file)
+            newWine.photo = filename
+            try {
+                await axios.post(PF, data)
+            } catch (error) {
+                console.log(error, ' from add')
+            }
+        }
+        try {
+            const res = await axios.post(PF, newWine);
+            console.log(res)
             history.push('/shop')
-        })
+            // window.location.replace("/shop");
+        } catch (err) {
+            console.log(err, ' from add')
+        }
     }
+    // try {
+    //     fetch(PF, {
+    //         method: 'POST',
+    //         headers: { "Content-Type": "application/json" },
+    //         body: JSON.stringify(newWine)
+    //     }).then(() => {
+    //         console.log('new wine added')
+    //         history.push('/shop')
+    //     })
+    // } catch (error) {
+    //     console.log(error)
+    // }
+
+
+
 
     return (
         <BackgroundPhoto>
             <Container>
-                {/* <WineImage src="https://chamisalvineyards.com/wp-content/uploads/2018/06/CV-morrito-pinot-WP_705x214.png" /> */}
+                {file && (
+                    <WineImage src={URL.createObjectURL(file)} alt='wine' />
+                )}
                 <Form onSubmit={handleSubmit}>
                     <WriteFormGroup>
                         <LabelPlus htmlFor="fileInput">
@@ -54,9 +84,9 @@ const AddProduct = () => {
                         <InputFile
                             type="file"
                             id="fileInput"
-                        // required
-                        // value={title}
-                        // onChange={e => setTitle(e.target.value)}
+                            style={{ display: 'none' }}
+                            required
+                            onChange={(e) => setFile(e.target.files[0])}
                         />
                     </WriteFormGroup>
                     <WriteFormGroup>

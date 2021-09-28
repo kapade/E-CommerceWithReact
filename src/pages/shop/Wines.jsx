@@ -35,7 +35,7 @@ const Wines = () => {
                         <Wrapper>
                             <Image src={wine.photo} alt="zad" />
                             <Title>{wine.title}</Title>
-                            <Info>{wine.info}</Info>
+                            {/* <Info>{wine.info}</Info> */}
                             <Button value="LEARN MORE" />
                         </Wrapper>
                     </Link>

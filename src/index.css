@@ -36,26 +36,9 @@ html, body {
     background-color: #3f8079;
 }
 
-a,span {
-    text-decoration: none;
-    text-align: center;
-    margin:2px;
-}
-
-.listItems > a {
-    margin-left: 10px;
-    color: #B8B4AB;
-    text-decoration: none;
-    width: 40vw;
-    text-align: center;
-    padding-top: 90px;
-    font-size: 2em;
-    font-family: "Requiem Text-HTF",serif;
-    opacity: 0.8;
-}
-.listItems > a:hover{
-    color: #d4d0c3;
-    
+.StripeElement {
+	width: 100%;
+	padding: 11px 15px 11px 0;
 }
 
 ul{

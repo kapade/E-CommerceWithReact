@@ -15,18 +15,19 @@ import EditProduct from './admin/EditProduct';
 import React, { Component, useContext } from 'react';
 import About from './pages/about/About';
 import { Context } from './context/Context';
+import Settings from './pages/settings/Settings';
 
 
 
 
 const App = () => {
-  const { user, admin } = useContext(Context)
-  console.log(user)
+  const { user } = useContext(Context)
+
   return (
     <div className="App">
       {/* Announcement */}
-      <NavBar />
       <Router>
+        <NavBar />
         <Switch>
           <Route exact path="/" >
             <Home />
@@ -39,22 +40,21 @@ const App = () => {
           </Route>
           <Route path="/login" >
             {user ? <Home /> : <Login />}
-            {/* <Login /> */}
           </Route>
           <Route path="/registration" >
             {user ? <Home /> : <RegistrationForm />}
-            {/* <RegistrationForm /> */}
           </Route>
           <Route path="/add" >
-            {admin ? <Home /> : <AddProduct />}
-            {/* <AddProduct /> */}
+            {user?.role === 'admin' ? <AddProduct /> : <Home />}
           </Route>
           <Route path="/edit">
-            {admin ? <Home /> : <EditProduct />}
-            {/* <EditProduct /> */}
+            {user?.role === 'admin' ? <EditProduct /> : <Home />}
           </Route>
           <Route path="/basket" >
             <ShoppingCart />
+          </Route>
+          <Route path="/profile" >
+            {user ? <Settings /> : <Home />}
           </Route>
           <Route path="/forgotPassword" >
             <ForgotPassword />
@@ -65,20 +65,11 @@ const App = () => {
           <Route path="/*" >
             <NotFound />
           </Route>
-          {/* <Route path="/registration/:data">
-            <PrintData />
-          </Route> */}
         </Switch>
+        <Footer />
       </Router>
-      <Footer />
     </div>
   )
 }
-
-
-// function PrintData() {
-//   let { data } = useParams();
-//   console.log(data)
-// }
 
 export default App;

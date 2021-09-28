@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 
-const RegistrationButton = () => {
+const RegistrationButton = ({ value }) => {
     return (
         <Container>
-            <Button type="submit">sign up</Button>
+            <Button type="submit">{value}</Button>
         </Container>
     )
 }

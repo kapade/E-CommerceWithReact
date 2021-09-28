@@ -3,14 +3,17 @@ import AddIcon from '@material-ui/icons/Add';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useHistory, useLocation } from "react-router";
+import { useContext } from "react";
+import { Context } from "../context/Context";
+
+const PF = "http://localhost:5000/vineyards/products/"
 
 const EditProduct = () => {
     const location = useLocation()
     const path = location.pathname.split("/")[2]
-    const id = location.state?.wineId
+    // const id = location.state?.wineId
     const [wine, setWine] = useState([])
-    const PF = "http://localhost:5000/vineyards/products"
-    // const { user } = useContext(Context)
+    const { user } = useContext(Context)
     const [title, setTitle] = useState("")
     const [year, setYear] = useState("")
     const [price, setPrice] = useState("")
@@ -18,17 +21,12 @@ const EditProduct = () => {
     const [aroma, setAroma] = useState("")
     const [flavor, setFlavor] = useState("")
     const [finish, setFinish] = useState("")
-    const [updateMode, setUpdateMode] = useState(false)
+    const [file, setFile] = useState(null)
     const history = useHistory()
-
-
-    // fix error with message!!!!!!!
-
 
     useEffect(() => {
         const fetchWine = async () => {
             const res = await axios.get(`${PF}/${path}`)
-            console.log(res)
             setWine(res.data.data.data)
             setTitle(res.data.data.data.title)
             setYear(res.data.data.data.year)
@@ -41,37 +39,42 @@ const EditProduct = () => {
         fetchWine()
     }, [path])
 
-
-    // const handleDelete = async () => {
-    //     try {
-    //         await axios.delete('/blogs/' + path)
-    //         window.location.replace('/')
-    //     } catch (error) {
-    //         console.log("You didn't delete! Try again")
-    //     }
-    // }
-
-    // const handleUpdate = async () => {
-    //     try {
-    //         await axios.put('/blogs/' + path) &
-    //             setUpdateMode(false)
-    //     } catch (error) {
-    //         console.log("You didn't delete! Try again")
-    //     }
-    // }
-
-    const handleUpdate = e => {
+    const handleUpdate = async e => {
         e.preventDefault()
-        const wine = { title, year, price, alcohol, aroma, flavor, finish }
+        const newWine = { title, year, price, alcohol, aroma, flavor, finish }
 
-        fetch(`${PF}/${path}`, {
-            method: 'PATCH',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(wine)
-        }).then(() => {
-            console.log('new wine added')
+        // if (file) {
+        //     const data = new FormData()
+        //     const filename = Date.now() + file.name
+        //     data.append("name", filename)
+        //     data.append("file", file)
+        //     newWine.photo = filename
+        //     try {
+        //         await axios.post(PF, data)
+        //     } catch (error) {
+        //         console.log(error, ' from add')
+        //     }
+        // }
+        try {
+            const res = await axios.post(PF, newWine);
+            console.log(res)
             history.push('/shop')
-        })
+            // window.location.replace("/shop");
+        } catch (err) {
+            console.log(err, ' from add')
+        }
+        // try {
+        //     fetch(`${PF}/${path}`, {
+        //         method: 'PATCH',
+        //         headers: { "Content-Type": "application/json" },
+        //         body: JSON.stringify(wine)
+        //     }).then(() => {
+        //         console.log('new wine added')
+        //         history.push('/shop')
+        //     })
+        // } catch (error) {
+        //     console.log(error, ' from edit')
+        // }
     }
 
     return (
@@ -79,9 +82,11 @@ const EditProduct = () => {
             <Container>
                 {wine.photo && (
                     <WineImage src={PF + wine.photo} />
-                )} {
-
-                }
+                )}
+                {/* URL.createObjectURL(file) : PF + '/' + wine.photo */}
+                {/* {file && (
+                    <WineImage src={URL.createObjectURL(file)} alt='wine' />
+                )} */}
                 <Form onSubmit={handleUpdate}>
                     <WriteFormGroup>
                         <LabelPlus htmlFor="fileInput">
@@ -91,9 +96,14 @@ const EditProduct = () => {
                             <Text>Add product photo</Text>
                         </LabelPlus>
                     </WriteFormGroup>
-                    <WriteFormGroup>
-                        <InputFile type="file" id="fileInput" />
-                    </WriteFormGroup>
+                    {/* <WriteFormGroup>
+                        <InputFile
+                            type="file"
+                            id="fileInput"
+                            required
+                            onChange={(e) => setFile(e.target.files[0])}
+                        />
+                    </WriteFormGroup> */}
                     <WriteFormGroup>
                         <Input
                             type="text"
@@ -159,7 +169,6 @@ const EditProduct = () => {
                     </WriteFormGroup>
                     <WriteFormGroup>
                         <Button type="submit">Update</Button>
-                        {/* <Button type="submit">Delete</Button> */}
                     </WriteFormGroup>
                 </Form>
             </Container>
