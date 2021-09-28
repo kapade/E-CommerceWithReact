@@ -92,6 +92,8 @@ const Product = () => {
     ]);
   };
 
+
+  
   // const [options, setOptions] = useState([1]);
   //  this.state = {quan:1}
   
@@ -121,7 +123,7 @@ const Product = () => {
                 {/* fix stock */}
                 <Option value="1">1</Option>
                 <Option value="2">2</Option>
-                <Option value="3">3</Option>
+                <Option value="3" selected>3</Option>
                 <Option value="4">4</Option>
                 <Option value="5">5</Option>
                 <Option value="6">6</Option>
